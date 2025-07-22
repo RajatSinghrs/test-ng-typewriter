@@ -76,7 +76,6 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="mb-0">
-                  <!-- <span class="status-indicator" [ngClass]="getStatusClass(basic1Running$ | async)"></span> -->
                   <span class="status-indicator" [ngClass]="getStatusClass((basic1Running$ | async) ?? false)"></span>
 
                   Test 1: Default Configuration
@@ -122,9 +121,7 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="mb-0">
-                  <!-- <span class="status-indicator" [ngClass]="getStatusClass(basic2Running$ | async)"></span> -->
                   <span class="status-indicator" [ngClass]="getStatusClass((basic2Running$ | async) ?? false)"></span>
-
                   Test 2: Custom Speed (50ms)
                 </h5>
               </div>
@@ -270,10 +267,6 @@
                       'ms' : '—' }}</span>
                   </div>
                   <div class="performance-meter">
-                    <!-- <div 
-                      class="performance-bar" 
-                      [style.width.%]="performanceMetrics.actualSpeed > 0 ? Math.min(100, (performanceMetrics.actualSpeed / performanceMetrics.expectedSpeed) * 100) : 0">
-                    </div> -->
                     <div class="performance-bar" [style.width.%]="getPerformanceWidth()">
                     </div>
                   </div>
