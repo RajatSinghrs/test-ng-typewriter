@@ -16,10 +16,7 @@
             npm i typewriter-text-effect
           </small>
         </div>
-        <a 
-          href="https://www.npmjs.com/package/typewriter-text-effect" 
-          target="_blank" 
-          class="btn btn-light btn-sm">
+        <a href="https://www.npmjs.com/package/typewriter-text-effect" target="_blank" class="btn btn-light btn-sm">
           <i class="fas fa-external-link-alt me-2"></i>NPM Package
         </a>
       </div>
@@ -79,7 +76,9 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="mb-0">
-                  <span class="status-indicator" [ngClass]="getStatusClass(basic1Running$ | async)"></span>
+                  <!-- <span class="status-indicator" [ngClass]="getStatusClass(basic1Running$ | async)"></span> -->
+                  <span class="status-indicator" [ngClass]="getStatusClass((basic1Running$ | async) ?? false)"></span>
+
                   Test 1: Default Configuration
                 </h5>
               </div>
@@ -95,28 +94,18 @@
                   </div>
                 </div>
                 <div class="btn-group mb-3" role="group">
-                  <button 
-                    type="button" 
-                    class="btn btn-success method-btn"
+                  <button type="button" class="btn btn-success method-btn"
                     (click)="handleBasicTest('basic-1', 'start')">
                     <i class="fas fa-play me-1"></i>Start
                   </button>
-                  <button 
-                    type="button" 
-                    class="btn btn-warning method-btn"
+                  <button type="button" class="btn btn-warning method-btn"
                     (click)="handleBasicTest('basic-1', 'pause')">
                     <i class="fas fa-pause me-1"></i>Pause
                   </button>
-                  <button 
-                    type="button" 
-                    class="btn btn-info method-btn"
-                    (click)="handleBasicTest('basic-1', 'resume')">
+                  <button type="button" class="btn btn-info method-btn" (click)="handleBasicTest('basic-1', 'resume')">
                     <i class="fas fa-play me-1"></i>Resume
                   </button>
-                  <button 
-                    type="button" 
-                    class="btn btn-danger method-btn"
-                    (click)="handleBasicTest('basic-1', 'stop')">
+                  <button type="button" class="btn btn-danger method-btn" (click)="handleBasicTest('basic-1', 'stop')">
                     <i class="fas fa-stop me-1"></i>Stop
                   </button>
                 </div>
@@ -133,7 +122,9 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="mb-0">
-                  <span class="status-indicator" [ngClass]="getStatusClass(basic2Running$ | async)"></span>
+                  <!-- <span class="status-indicator" [ngClass]="getStatusClass(basic2Running$ | async)"></span> -->
+                  <span class="status-indicator" [ngClass]="getStatusClass((basic2Running$ | async) ?? false)"></span>
+
                   Test 2: Custom Speed (50ms)
                 </h5>
               </div>
@@ -149,15 +140,11 @@
                   </div>
                 </div>
                 <div class="btn-group mb-3" role="group">
-                  <button 
-                    type="button" 
-                    class="btn btn-success method-btn"
+                  <button type="button" class="btn btn-success method-btn"
                     (click)="handleBasicTest('basic-2', 'start')">
                     <i class="fas fa-play me-1"></i>Start
                   </button>
-                  <button 
-                    type="button" 
-                    class="btn btn-secondary method-btn"
+                  <button type="button" class="btn btn-secondary method-btn"
                     (click)="handleBasicTest('basic-2', 'reset')">
                     <i class="fas fa-redo me-1"></i>Reset
                   </button>
@@ -195,13 +182,10 @@
                 <div class="test-output mb-3">
                   <div id="methods-test">Ready for method testing...</div>
                 </div>
-                
+
                 <div class="row g-2 mb-3">
                   <div class="col-6" *ngFor="let method of methods">
-                    <button 
-                      type="button" 
-                      class="btn method-btn w-100"
-                      [ngClass]="method.color"
+                    <button type="button" class="btn method-btn w-100" [ngClass]="method.color"
                       (click)="handleMethodCall(method.name)">
                       <i [ngClass]="method.icon" class="me-1"></i>
                       {{ method.name }}()
@@ -236,10 +220,7 @@
                     <span class="result">{{ log.result }}</span>
                   </div>
                 </div>
-                <button 
-                  type="button" 
-                  class="btn btn-secondary method-btn w-100 mt-3"
-                  (click)="clearLog()">
+                <button type="button" class="btn btn-secondary method-btn w-100 mt-3" (click)="clearLog()">
                   <i class="fas fa-eraser me-2"></i>Clear Log
                 </button>
               </div>
@@ -271,7 +252,7 @@
                 <div class="test-output mb-3">
                   <div id="performance-test">Ready for performance test...</div>
                 </div>
-                
+
                 <div class="mb-3">
                   <div class="d-flex justify-content-between small mb-1">
                     <span>Expected Speed</span>
@@ -281,37 +262,36 @@
                     <div class="performance-bar" style="width: 100%"></div>
                   </div>
                 </div>
-                
+
                 <div class="mb-3">
                   <div class="d-flex justify-content-between small mb-1">
                     <span>Actual Speed</span>
-                    <span>{{ performanceMetrics.actualSpeed > 0 ? (performanceMetrics.actualSpeed | number:'1.1-1') + 'ms' : '—' }}</span>
+                    <span>{{ performanceMetrics.actualSpeed > 0 ? (performanceMetrics.actualSpeed | number:'1.1-1') +
+                      'ms' : '—' }}</span>
                   </div>
                   <div class="performance-meter">
-                    <div 
+                    <!-- <div 
                       class="performance-bar" 
                       [style.width.%]="performanceMetrics.actualSpeed > 0 ? Math.min(100, (performanceMetrics.actualSpeed / performanceMetrics.expectedSpeed) * 100) : 0">
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <div class="d-flex justify-content-between small mb-1">
-                    <span>Accuracy</span>
-                    <span>{{ performanceMetrics.accuracy > 0 ? (performanceMetrics.accuracy | number:'1.1-1') + '%' : '—' }}</span>
-                  </div>
-                  <div class="performance-meter">
-                    <div 
-                      class="performance-bar" 
-                      [style.width.%]="performanceMetrics.accuracy">
+                    </div> -->
+                    <div class="performance-bar" [style.width.%]="getPerformanceWidth()">
                     </div>
                   </div>
                 </div>
 
-                <button 
-                  type="button" 
-                  class="btn btn-primary method-btn w-100"
-                  [disabled]="performanceRunning"
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between small mb-1">
+                    <span>Accuracy</span>
+                    <span>{{ performanceMetrics.accuracy > 0 ? (performanceMetrics.accuracy | number:'1.1-1') + '%' :
+                      '—' }}</span>
+                  </div>
+                  <div class="performance-meter">
+                    <div class="performance-bar" [style.width.%]="performanceMetrics.accuracy">
+                    </div>
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-primary method-btn w-100" [disabled]="performanceRunning"
                   (click)="runPerformanceTest()">
                   <i class="fas fa-stopwatch me-2"></i>
                   {{ performanceRunning ? 'Running Test...' : 'Run Performance Test' }}
@@ -341,24 +321,15 @@
                     <span class="font-roboto-mono">{{ memoryStats.timers }}</span>
                   </div>
                 </div>
-                
+
                 <div class="d-grid gap-2">
-                  <button 
-                    type="button" 
-                    class="btn btn-success method-btn"
-                    (click)="createTestInstances()">
+                  <button type="button" class="btn btn-success method-btn" (click)="createTestInstances()">
                     <i class="fas fa-plus me-2"></i>Create 5 Instances
                   </button>
-                  <button 
-                    type="button" 
-                    class="btn btn-danger method-btn"
-                    (click)="destroyTestInstances()">
+                  <button type="button" class="btn btn-danger method-btn" (click)="destroyTestInstances()">
                     <i class="fas fa-trash me-2"></i>Destroy Test Instances
                   </button>
-                  <button 
-                    type="button" 
-                    class="btn btn-warning method-btn"
-                    (click)="checkMemoryLeaks()">
+                  <button type="button" class="btn btn-warning method-btn" (click)="checkMemoryLeaks()">
                     <i class="fas fa-search me-2"></i>Check for Leaks
                   </button>
                 </div>
@@ -413,22 +384,13 @@
         </div>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-          <button 
-            type="button" 
-            class="btn btn-primary method-btn"
-            (click)="runAllTests()">
+          <button type="button" class="btn btn-primary method-btn" (click)="runAllTests()">
             <i class="fas fa-play me-2"></i>Run All Tests
           </button>
-          <button 
-            type="button" 
-            class="btn btn-secondary method-btn"
-            (click)="resetAllTests()">
+          <button type="button" class="btn btn-secondary method-btn" (click)="resetAllTests()">
             <i class="fas fa-redo me-2"></i>Reset All Tests
           </button>
-          <button 
-            type="button" 
-            class="btn btn-info method-btn"
-            (click)="exportResults()">
+          <button type="button" class="btn btn-info method-btn" (click)="exportResults()">
             <i class="fas fa-download me-2"></i>Export Results
           </button>
         </div>
