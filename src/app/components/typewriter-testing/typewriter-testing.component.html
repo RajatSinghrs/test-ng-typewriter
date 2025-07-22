@@ -1,1 +1,467 @@
-<p>typewriter-testing works!</p>
+<!-- Header -->
+<header class="main-header">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <h1 class="mb-2">
+          <i class="fas fa-keyboard me-3"></i>
+          Typewriter Text Effect Testing Suite
+        </h1>
+        <p class="mb-0">Comprehensive Angular testing for typewriter-text-effect v2.0.0</p>
+      </div>
+      <div class="col-md-4 text-end">
+        <div class="mb-2">
+          <small class="text-light">
+            <i class="fas fa-download me-1"></i>
+            npm i typewriter-text-effect
+          </small>
+        </div>
+        <a 
+          href="https://www.npmjs.com/package/typewriter-text-effect" 
+          target="_blank" 
+          class="btn btn-light btn-sm">
+          <i class="fas fa-external-link-alt me-2"></i>NPM Package
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container py-4">
+  <!-- Installation and Setup -->
+  <section class="mb-5">
+    <div class="card test-card">
+      <div class="card-header section-header">
+        <h2 class="h4 mb-0">
+          <i class="fas fa-cog text-primary me-3"></i>
+          Package Installation & Setup
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Installation Command</h5>
+            <div class="code-block">
+              <code>npm install typewriter-text-effect</code>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h5>Import Statement</h5>
+            <div class="code-block">
+              <code>import {{ '{' }} Typewriter {{ '}' }} from 'typewriter-text-effect';</code>
+            </div>
+          </div>
+        </div>
+        <div class="mt-3" *ngIf="(basic1Error$ | async) || (basic2Error$ | async)">
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Error:</strong> Failed to load typewriter-text-effect package.
+            Make sure it's installed: npm install typewriter-text-effect
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Basic Functionality Tests -->
+  <section class="mb-5">
+    <div class="card test-card">
+      <div class="card-header section-header">
+        <h2 class="h4 mb-0">
+          <i class="fas fa-play-circle text-success me-3"></i>
+          Basic Functionality Tests
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- Test 1: Default Configuration -->
+          <div class="col-lg-6 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <span class="status-indicator" [ngClass]="getStatusClass(basic1Running$ | async)"></span>
+                  Test 1: Default Configuration
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="test-output mb-3">
+                  <div id="basic-1">
+                    <span *ngIf="basic1Error$ | async as error; else readyText1" class="text-danger">
+                      Error: {{ error }}
+                    </span>
+                    <ng-template #readyText1>
+                      <span>Ready for testing...</span>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="btn-group mb-3" role="group">
+                  <button 
+                    type="button" 
+                    class="btn btn-success method-btn"
+                    (click)="handleBasicTest('basic-1', 'start')">
+                    <i class="fas fa-play me-1"></i>Start
+                  </button>
+                  <button 
+                    type="button" 
+                    class="btn btn-warning method-btn"
+                    (click)="handleBasicTest('basic-1', 'pause')">
+                    <i class="fas fa-pause me-1"></i>Pause
+                  </button>
+                  <button 
+                    type="button" 
+                    class="btn btn-info method-btn"
+                    (click)="handleBasicTest('basic-1', 'resume')">
+                    <i class="fas fa-play me-1"></i>Resume
+                  </button>
+                  <button 
+                    type="button" 
+                    class="btn btn-danger method-btn"
+                    (click)="handleBasicTest('basic-1', 'stop')">
+                    <i class="fas fa-stop me-1"></i>Stop
+                  </button>
+                </div>
+                <div class="small text-muted font-roboto-mono">
+                  <div>Running: {{ (basic1Running$ | async) || false }}</div>
+                  <div>Instance: Available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Test 2: Custom Speed -->
+          <div class="col-lg-6 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <span class="status-indicator" [ngClass]="getStatusClass(basic2Running$ | async)"></span>
+                  Test 2: Custom Speed (50ms)
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="test-output mb-3">
+                  <div id="basic-2">
+                    <span *ngIf="basic2Error$ | async as error; else readyText2" class="text-danger">
+                      Error: {{ error }}
+                    </span>
+                    <ng-template #readyText2>
+                      <span>Ready for speed testing...</span>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="btn-group mb-3" role="group">
+                  <button 
+                    type="button" 
+                    class="btn btn-success method-btn"
+                    (click)="handleBasicTest('basic-2', 'start')">
+                    <i class="fas fa-play me-1"></i>Start
+                  </button>
+                  <button 
+                    type="button" 
+                    class="btn btn-secondary method-btn"
+                    (click)="handleBasicTest('basic-2', 'reset')">
+                    <i class="fas fa-redo me-1"></i>Reset
+                  </button>
+                </div>
+                <div class="small text-muted font-roboto-mono">
+                  <div>Speed: 50ms | Delete: 25ms</div>
+                  <div>Running: {{ (basic2Running$ | async) || false }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method Testing -->
+  <section class="mb-5">
+    <div class="card test-card">
+      <div class="card-header section-header">
+        <h2 class="h4 mb-0">
+          <i class="fas fa-cogs text-primary me-3"></i>
+          Interactive Method Testing
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- Method Control Panel -->
+          <div class="col-lg-6 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">Method Control Panel</h5>
+              </div>
+              <div class="card-body">
+                <div class="test-output mb-3">
+                  <div id="methods-test">Ready for method testing...</div>
+                </div>
+                
+                <div class="row g-2 mb-3">
+                  <div class="col-6" *ngFor="let method of methods">
+                    <button 
+                      type="button" 
+                      class="btn method-btn w-100"
+                      [ngClass]="method.color"
+                      (click)="handleMethodCall(method.name)">
+                      <i [ngClass]="method.icon" class="me-1"></i>
+                      {{ method.name }}()
+                    </button>
+                  </div>
+                </div>
+
+                <div class="small text-muted font-roboto-mono">
+                  <div>Last Method: {{ lastMethod }}</div>
+                  <div>Return Value: {{ lastReturn }}</div>
+                  <div>Timestamp: {{ lastTimestamp }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Method Execution Log -->
+          <div class="col-lg-6 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">Method Execution Log</h5>
+              </div>
+              <div class="card-body">
+                <div class="method-log">
+                  <div *ngIf="methodLogs.length === 0" class="text-muted">
+                    Method execution log will appear here...
+                  </div>
+                  <div *ngFor="let log of methodLogs" class="mb-1">
+                    <span class="timestamp">[{{ log.timestamp }}]</span>
+                    {{ log.method }}()
+                    <span class="arrow">→</span>
+                    <span class="result">{{ log.result }}</span>
+                  </div>
+                </div>
+                <button 
+                  type="button" 
+                  class="btn btn-secondary method-btn w-100 mt-3"
+                  (click)="clearLog()">
+                  <i class="fas fa-eraser me-2"></i>Clear Log
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Performance Monitoring -->
+  <section class="mb-5">
+    <div class="card test-card">
+      <div class="card-header section-header">
+        <h2 class="h4 mb-0">
+          <i class="fas fa-tachometer-alt text-warning me-3"></i>
+          Performance & Memory Testing
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- Timing Accuracy -->
+          <div class="col-lg-6 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">Timing Accuracy Test</h5>
+              </div>
+              <div class="card-body">
+                <div class="test-output mb-3">
+                  <div id="performance-test">Ready for performance test...</div>
+                </div>
+                
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between small mb-1">
+                    <span>Expected Speed</span>
+                    <span>{{ performanceMetrics.expectedSpeed }}ms</span>
+                  </div>
+                  <div class="performance-meter">
+                    <div class="performance-bar" style="width: 100%"></div>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between small mb-1">
+                    <span>Actual Speed</span>
+                    <span>{{ performanceMetrics.actualSpeed > 0 ? (performanceMetrics.actualSpeed | number:'1.1-1') + 'ms' : '—' }}</span>
+                  </div>
+                  <div class="performance-meter">
+                    <div 
+                      class="performance-bar" 
+                      [style.width.%]="performanceMetrics.actualSpeed > 0 ? Math.min(100, (performanceMetrics.actualSpeed / performanceMetrics.expectedSpeed) * 100) : 0">
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between small mb-1">
+                    <span>Accuracy</span>
+                    <span>{{ performanceMetrics.accuracy > 0 ? (performanceMetrics.accuracy | number:'1.1-1') + '%' : '—' }}</span>
+                  </div>
+                  <div class="performance-meter">
+                    <div 
+                      class="performance-bar" 
+                      [style.width.%]="performanceMetrics.accuracy">
+                    </div>
+                  </div>
+                </div>
+
+                <button 
+                  type="button" 
+                  class="btn btn-primary method-btn w-100"
+                  [disabled]="performanceRunning"
+                  (click)="runPerformanceTest()">
+                  <i class="fas fa-stopwatch me-2"></i>
+                  {{ performanceRunning ? 'Running Test...' : 'Run Performance Test' }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Memory Testing -->
+          <div class="col-lg-6 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">Memory & Cleanup Test</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between small mb-2">
+                    <span>Active Instances</span>
+                    <span class="font-roboto-mono">{{ memoryStats.activeInstances }}</span>
+                  </div>
+                  <div class="d-flex justify-content-between small mb-2">
+                    <span>Event Listeners</span>
+                    <span class="font-roboto-mono">{{ memoryStats.eventListeners }}</span>
+                  </div>
+                  <div class="d-flex justify-content-between small mb-2">
+                    <span>Timeouts/Intervals</span>
+                    <span class="font-roboto-mono">{{ memoryStats.timers }}</span>
+                  </div>
+                </div>
+                
+                <div class="d-grid gap-2">
+                  <button 
+                    type="button" 
+                    class="btn btn-success method-btn"
+                    (click)="createTestInstances()">
+                    <i class="fas fa-plus me-2"></i>Create 5 Instances
+                  </button>
+                  <button 
+                    type="button" 
+                    class="btn btn-danger method-btn"
+                    (click)="destroyTestInstances()">
+                    <i class="fas fa-trash me-2"></i>Destroy Test Instances
+                  </button>
+                  <button 
+                    type="button" 
+                    class="btn btn-warning method-btn"
+                    (click)="checkMemoryLeaks()">
+                    <i class="fas fa-search me-2"></i>Check for Leaks
+                  </button>
+                </div>
+
+                <div class="small text-muted mt-3">
+                  <div>Memory Status: <span class="font-roboto-mono">{{ memoryStats.memoryStatus }}</span></div>
+                  <div>Last Check: <span class="font-roboto-mono">{{ memoryStats.lastCheck }}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Test Results -->
+  <section class="mb-5">
+    <div class="card test-card">
+      <div class="card-header section-header">
+        <h2 class="h4 mb-0">
+          <i class="fas fa-chart-bar text-info me-3"></i>
+          Test Results & Coverage
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <div class="text-center">
+              <div class="h3 text-success mb-0">{{ testResults.passed }}</div>
+              <small class="text-muted">Passed</small>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="text-center">
+              <div class="h3 text-danger mb-0">{{ testResults.failed }}</div>
+              <small class="text-muted">Failed</small>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="text-center">
+              <div class="h3 text-primary mb-0">{{ testResults.total }}</div>
+              <small class="text-muted">Total</small>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="text-center">
+              <div class="h3 text-info mb-0">{{ getCoveragePercentage() }}%</div>
+              <small class="text-muted">Coverage</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+          <button 
+            type="button" 
+            class="btn btn-primary method-btn"
+            (click)="runAllTests()">
+            <i class="fas fa-play me-2"></i>Run All Tests
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-secondary method-btn"
+            (click)="resetAllTests()">
+            <i class="fas fa-redo me-2"></i>Reset All Tests
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-info method-btn"
+            (click)="exportResults()">
+            <i class="fas fa-download me-2"></i>Export Results
+          </button>
+        </div>
+
+        <!-- Test Results List -->
+        <div *ngIf="testResults.tests.length > 0" class="mt-4">
+          <h5>Recent Test Results</h5>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Test Name</th>
+                  <th>Status</th>
+                  <th>Timestamp</th>
+                  <th>Error</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let test of testResults.tests.slice(-10)">
+                  <td class="font-roboto-mono">{{ test.name }}</td>
+                  <td>
+                    <span class="badge" [ngClass]="test.passed ? 'bg-success' : 'bg-danger'">
+                      {{ test.passed ? 'PASS' : 'FAIL' }}
+                    </span>
+                  </td>
+                  <td class="small text-muted">{{ test.timestamp | date:'short' }}</td>
+                  <td class="small text-danger">{{ test.error || '—' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
