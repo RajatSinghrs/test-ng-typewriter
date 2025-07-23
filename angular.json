@@ -11,14 +11,14 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
               "typewriter-text-effect"
             ],
             "outputPath": "dist/typewriter-text-ng",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -26,7 +26,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/"
               }
             ],
             "styles": [
@@ -36,6 +37,14 @@
           },
           "configurations": {
             "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -47,13 +56,16 @@
                   "maximumWarning": "2kB",
                   "maximumError": "4kB"
                 }
-              ],
-              "outputHashing": "all"
+              ]
             },
             "development": {
               "optimization": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "aot": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "vendorChunk": true,
+              "buildOptimizer": false
             }
           },
           "defaultConfiguration": "production"
@@ -62,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "typewriter-text-ng:build:production"
+              "browserTarget": "typewriter-text-ng:build:production"
             },
             "development": {
-              "buildTarget": "typewriter-text-ng:build:development"
+              "browserTarget": "typewriter-text-ng:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +96,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/"
               }
             ],
             "styles": [
